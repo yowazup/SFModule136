@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Tracing;
@@ -74,15 +75,27 @@ namespace SFModule136
             }
             Console.ReadKey();
         }
+
         static void Top10UniqueWords(List<string> wordsList)
         {
-            var uniqueWords = new HashSet<string>(wordsList);
             var counter = new Dictionary<string, int>();
 
-            foreach (string word in uniqueWords)
-                counter.Add(word, word.Count());
+            foreach (string word in wordsList)
+            {
+                if (word.Length > 3) // уберем слова менее 4 символов, чтобы было интересно
+                {
+                    if (!counter.ContainsKey(word))
+                    {
+                        counter.Add(word, 1); // добавляем слово в словарь
+                    }
+                    else
+                    {
+                        counter[word] += 1; // добавляем повторение слова в словарь
+                    }
+                }
+            }
 
-            var sortedCounter = from item in counter orderby item.Value descending select item;
+            var sortedCounter = counter.OrderByDescending(x => x.Value);
 
             var top10 = sortedCounter.Take(10);
 
