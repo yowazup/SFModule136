@@ -80,6 +80,7 @@ namespace SFModule136
         {
             var counter = new Dictionary<string, int>();
 
+            var stopWatch3 = Stopwatch.StartNew();
             foreach (string word in wordsList)
             {
                 if (word.Length > 3) // уберем слова менее 4 символов, чтобы было интересно
@@ -98,9 +99,13 @@ namespace SFModule136
             var sortedCounter = counter.OrderByDescending(x => x.Value);
 
             var top10 = sortedCounter.Take(10);
+            var stopWatch3end = stopWatch3.Elapsed.TotalMilliseconds;
 
             foreach (KeyValuePair<string, int> x in top10)
                 Console.WriteLine($"{x.Key} = {x.Value}");
+
+            Console.WriteLine();
+            Console.WriteLine("Время подсчета топ-10 слов {0} мс.", stopWatch3end);
         }
     }
 }
