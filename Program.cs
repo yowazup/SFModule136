@@ -65,7 +65,7 @@ namespace SFModule136
 
                 // выведем топ-10 уникальных слов
                 Console.WriteLine();
-                Console.WriteLine("Топ-10 самых повторяющихся слов:");
+                Console.WriteLine("Топ-10 самых повторяющихся слов более 3 букв:");
                 Top10UniqueWords(wordsList);
             }
             else
